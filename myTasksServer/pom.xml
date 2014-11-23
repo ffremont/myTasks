@@ -11,7 +11,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>myTasks</name>
+    <name>myTasksServer</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
