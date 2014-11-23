@@ -213,22 +213,4 @@
             </plugin>
         </plugins>
     </build>
-    
-    <!-- livraison -->
-    <distributionManagement>
-        <repository>
-            <id>deployment</id>
-            <name>Internal Releases</name>
-            <url>http://nexus.local:8081/nexus/content/repositories/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>deployment</id>
-            <name>Internal Releases</name>
-            <url>http://nexus.local:8081/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-    <scm>
-        <developerConnection>scm:svn:https://github.com/ffremont/myTasksServer/trunk</developerConnection>
-        <connection>scm:svn:https://github.com/ffremont/myTasksServer/trunk</connection>
-    </scm>
 </project>
