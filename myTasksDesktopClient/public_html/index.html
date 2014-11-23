@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>myNote</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="css/images/favicon.ico">
+
+        <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/ng-tags-input.min.css" rel="stylesheet">
+        <link href="css/sb-admin-2.css" rel="stylesheet">
+        <link href="css/app.css" rel="stylesheet">
+
+        <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    </head>
+    <body ng-app="myNote">
+
+        <div ng-controller="appCtrl" id="wrapper">
+            <nav ng-class="{hide: $state.includes('login')}" ui-view="menu" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0"></nav>
+
+            <div ui-view="login"></div>
+            
+            <div ng-class="{hide: $state.includes('login')}" id="page-wrapper">
+                <div ui-view="main"></div>
+            </div>
+
+        </div>
+        <!-- /#wrapper -->
+
+        <script src="js/app.js"></script>
+    </body>
+</html>

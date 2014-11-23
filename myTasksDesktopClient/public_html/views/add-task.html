@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Ajouter une tâche</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Caractéristiques
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="subject">Sujet* : </label>
+                    <input id="subject" ng-model="notif" class="form-control" type="text" maxlength="128" name="subject"/>
+                </div>
+                <div class="form-group">
+                    <label for="content">Contenu* : </label>
+                    <textarea rows="8" id="content" ng-model="content" class="form-control" type="text" maxlength="1024" name="content"/>
+                </div>
+                <div class="form-group">
+                    <tags-input ng-model="tags"></tags-input>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-RELEASE</actionName>
+            <displayName>RELEASE</displayName>
+            <goals>
+                <goal>release:clean</goal>
+                <goal>release:prepare</goal>
+                <goal>release:perform</goal>
+                <goal>-X</goal>
+            </goals>
+            <properties>
+                <username>ffremont</username>
+                <password>doudou49</password>
+            </properties>
+            <activatedProfiles>
+                <activatedProfile>livraison</activatedProfile>
+            </activatedProfiles>
+        </action>
+    </actions>
