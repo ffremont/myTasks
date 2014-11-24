@@ -27,7 +27,7 @@
         </snapshotRepository>
     </distributionManagement>
     <scm>
-        <developerConnection>scm:svn:https://github.com/ffremont/myTasks/trunk</developerConnection>
-        <connection>scm:svn:https://github.com/ffremont/myTasks/trunk</connection>
+        <developerConnection>scm:svn:https://github.com/ffremont/myTasks/tags/1.0.0</developerConnection>
+        <connection>scm:svn:https://github.com/ffremont/myTasks/tags/1.0.0</connection>
     </scm>
 </project>
