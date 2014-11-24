@@ -20,7 +20,7 @@
     <build>
         <resources>
             <resource>
-                <directory></directory>
+                <directory />
                 <includes>
                     <include>Gruntfile.js</include>
                     <include>package.json</include>
