@@ -1,12 +1,10 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Version : ${project.version}
  */
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        clean: ["dist/", "nexus_dist/"],
+        clean: ["dist/", "bower_components/"],
         browserify: {
             js: {
                 src: 'public_html/js/app.js',
@@ -84,5 +82,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
 
     // The default tasks to run when you type: grunt
-    grunt.registerTask('default', ['bower:install', 'clean', 'browserify', 'copy', 'compress']);
+    grunt.registerTask('default', ['bower:install', 'browserify', 'copy', 'compress']);
 };
