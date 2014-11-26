@@ -82,5 +82,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
 
     // The default tasks to run when you type: grunt
-    grunt.registerTask('default', ['bower:install', 'browserify', 'copy', 'compress']);
+    grunt.registerTask('default', ['bower:install', 'browserify', 'copy']);
 };
