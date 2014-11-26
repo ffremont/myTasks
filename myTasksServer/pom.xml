@@ -138,6 +138,32 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-desktop-client</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>desktop-client</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
@@ -163,7 +189,7 @@
                 <version>2.5</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <webResources>
+                    <!--webResources>
                         <resource>
                             <filtering>true</filtering>
                             <directory>src/main/webapp</directory>
@@ -172,14 +198,7 @@
                                 <include>**/*.js</include>
                             </includes>
                         </resource>
-                    </webResources>
-                    <overlays>
-                        <overlay>
-                            <groupId>fr.ffremont.apps.myTasks</groupId>
-                            <artifactId>desktop-client</artifactId>
-                            <type>zip</type>
-                        </overlay>
-                    </overlays>
+                    </webResources-->
                 </configuration>
             </plugin>
             <plugin>
