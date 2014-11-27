@@ -45,5 +45,6 @@
     <scm>
         <developerConnection>scm:git:https://github.com/ffremont/myTasks</developerConnection>
         <connection>scm:git:https://github.com/ffremont/myTasks</connection>
-    </scm>
+      <tag>1.0.0</tag>
+  </scm>
 </project>
