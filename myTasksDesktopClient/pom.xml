@@ -13,44 +13,33 @@
     <name>myTasksDesktopClient</name>    
     <packaging>pom</packaging>
     
-    <properties>
-        <grunt.dist>dist/compress.zip</grunt.dist>
-    </properties>
-    
     <build>
         <plugins>
             <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <version>1.5.3</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
                 <executions>
                     <execution>
-                        <phase>prepare-package</phase>
                         <goals>
-                            <goal>replace</goal>
-                        </goals>                   
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/target/dist</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/dist</directory>
+                                    <!--filtering>true</filtering-->
+                                </resource>
+                            </resources>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <basedir>${project.basedir}/dist</basedir>
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                    <replacements>
-                        <replacement>
-                            <token>{{version}}</token>
-                            <value>${project.version}</value>
-                        </replacement>         
-                    </replacements>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <releaseProfiles>livraison</releaseProfiles>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -113,66 +102,4 @@
             </plugin>
         </plugins>
     </build>
-    
-    
-    <!--profiles>
-        <profile>
-            <id>integrationContinue</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-deploy-plugin</artifactId>
-                        <version>2.6</version>
-                        <executions>
-                            <execution>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>deploy-file</goal>
-                                </goals>
-                                <configuration>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
-                                    <packaging>zip</packaging>
-                                    <file>${grunt.dist}</file>
-                                    <repositoryId>deployment</repositoryId>
-                                    <url>${project.distributionManagement.snapshotRepository.url}</url>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>livraison</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-deploy-plugin</artifactId>
-                        <version>2.6</version>
-                        <executions>
-                            <execution>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>deploy-file</goal>
-                                </goals>
-                                <configuration>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
-                                    <packaging>zip</packaging>
-                                    <file>${grunt.dist}</file>
-                                    <repositoryId>deployment</repositoryId>
-                                    <url>${project.distributionManagement.repository.url}</url>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles-->
 </project>

@@ -58,17 +58,6 @@ module.exports = function (grunt) {
                 files: ['public_html/**'],
                 tasks: ['default']
             }
-        },
-        compress: {
-            livrable: {
-                options: {
-                    mode: 'zip',
-                    archive: 'dist/compress.zip'
-                },
-                files: [
-                    {expand: true, cwd: './dist', src: ['**/*']}
-                ]
-            }
         }
     });
     // Load the npm installed tasks
@@ -79,7 +68,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-compress');
 
     // The default tasks to run when you type: grunt
     grunt.registerTask('default', ['bower:install', 'browserify', 'copy']);
