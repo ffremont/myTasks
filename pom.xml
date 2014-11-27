@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.ffremont.apps.myTasks</groupId>
     <artifactId>myTasks</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>myTasksDesktopClient</module>
@@ -44,9 +44,8 @@
     </distributionManagement>
     <scm>
         
-        <developerConnection>scm:git:git://github.com/ffremont/myTasks.git</developerConnection>
-        <connection>scm:git:git://github.com/ffremont/myTasks.git</connection>
+        <developerConnection>scm:git:git://github.com:ffremont/myTasks.git</developerConnection>
+        <connection>scm:git:git://github.com:ffremont/myTasks.git</connection>
         <url>https://github.com/ffremont/myTasks</url>
-    <tag>1.0.0</tag>
   </scm>
 </project>
