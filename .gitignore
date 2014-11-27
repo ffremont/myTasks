@@ -3,3 +3,7 @@
 /myTasksServer/nb-configuration.xml
 /release.properties
 /pom.xml.releaseBackup
+/myTasksDesktopClient/node_modules/
+/myTasksDesktopClient/target/
+/myTasksDesktopClient/bower_components/
+/myTasksDesktopClient/dist/
