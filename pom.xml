@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.ffremont.apps.myTasks</groupId>
     <artifactId>myTasks</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <packaging>pom</packaging>
     <modules>
         <module>myTasksDesktopClient</module>
@@ -42,7 +42,7 @@
         </snapshotRepository>
     </distributionManagement>
     <scm>
-        <developerConnection>scm:svn:https://github.com/ffremont/myTasks/tags/1.0.1-SNAPSHOT</developerConnection>
-        <connection>scm:svn:https://github.com/ffremont/myTasks/tags/1.0.1-SNAPSHOT</connection>
+        <developerConnection>scm:svn:https://github.com/ffremont/myTasks/tags/1.0.2</developerConnection>
+        <connection>scm:svn:https://github.com/ffremont/myTasks/tags/1.0.2</connection>
     </scm>
 </project>
