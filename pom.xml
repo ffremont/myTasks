@@ -23,6 +23,7 @@
                     <configuration>
                         <releaseProfiles>livraison</releaseProfiles>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <pushChanges>false</pushChanges>
                     </configuration>
                 </plugin>
             </plugins>
@@ -45,5 +46,6 @@
     <scm>
         <developerConnection>scm:git:git@github.com/ffremont/myTasks.git</developerConnection>
         <connection>scm:git:git@github.com/ffremont/myTasks.git</connection>
+    <tag>1.0.0</tag>
   </scm>
 </project>
