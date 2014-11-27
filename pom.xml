@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.ffremont.apps.myTasks</groupId>
     <artifactId>myTasks</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>myTasksDesktopClient</module>
@@ -19,11 +19,10 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.1</version>
+                    <version>2.5</version>
                     <configuration>
                         <releaseProfiles>livraison</releaseProfiles>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
-                        <pushChanges>false</pushChanges>
                     </configuration>
                 </plugin>
             </plugins>
@@ -46,6 +45,5 @@
     <scm>
         <developerConnection>scm:git:git@github.com/ffremont/myTasks.git</developerConnection>
         <connection>scm:git:git@github.com/ffremont/myTasks.git</connection>
-    <tag>myTasks-1.0.0</tag>
   </scm>
 </project>
