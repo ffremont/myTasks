@@ -43,8 +43,8 @@
         </snapshotRepository>
     </distributionManagement>
     <scm>
-        <developerConnection>scm:git:https://github.com/ffremont/myTasks</developerConnection>
-        <connection>scm:git:https://github.com/ffremont/myTasks</connection>
+        <developerConnection>scm:git:git@github.com/ffremont/myTasks.git</developerConnection>
+        <connection>scm:git:git@github.com/ffremont/myTasks.git</connection>
       <tag>1.0.0</tag>
   </scm>
 </project>
