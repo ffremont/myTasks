@@ -22,7 +22,6 @@
                     <version>2.5.1</version>
                     <configuration>
                         <releaseProfiles>livraison</releaseProfiles>
-                        <dryRun>true</dryRun>
                     </configuration>
                 </plugin>
             </plugins>
