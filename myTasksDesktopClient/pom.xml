@@ -24,9 +24,25 @@
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
-                        <phase>prepare-package</phase>
+                        <phase>process-resources</phase>
                         <configuration>
                             <outputDirectory>${project.basedir}/target/dist</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/dist</directory>
+                                    <!--filtering>true</filtering-->
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>debug</id>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/target/dist-debug</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${project.basedir}/dist</directory>
@@ -87,7 +103,7 @@
                     </execution>
                     <execution>
                         <id>grunt-install</id>
-                        <phase>process-resources</phase>
+                        <phase>process-sources</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -97,19 +113,51 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.samaxes.maven</groupId>
+                <artifactId>minify-maven-plugin</artifactId>
+                <version>1.7.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <charset>UTF-8</charset>
+                            <jsSourceFiles>
+                                <jsSourceFile>${project.build.directory}/dist/js/app.js</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsFinalFile>${project.build.directory}/dist/js/app.js</jsFinalFile>
+                            <jsEngine>CLOSURE</jsEngine>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptor>assembly.xml</descriptor>
-                </configuration>
                 <executions>
                     <execution>
+                        <id>min</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
+                        <configuration>
+                            <descriptor>assembly.xml</descriptor>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>debug</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptor>assembly-debug.xml</descriptor>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
