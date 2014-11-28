@@ -44,7 +44,6 @@
         </snapshotRepository>
     </distributionManagement>
     <scm>
-        
         <developerConnection>scm:git:https://github.com/ffremont/myTasks.git</developerConnection>
         <connection>scm:git:https://github.com/ffremont/myTasks.git</connection>
         <url>https://github.com/ffremont/myTasks</url>
