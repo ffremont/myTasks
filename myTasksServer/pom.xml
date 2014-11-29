@@ -76,8 +76,6 @@
             <artifactId>jersey-client</artifactId>
             <version>2.11</version>
         </dependency>
-
-
         
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
@@ -140,7 +138,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
             </plugin>
-            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -188,4 +185,35 @@
             </plugin>
         </plugins>
     </build>
+    
+    <profiles>
+        <profile>
+            <id>livraison</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.samaxes.maven</groupId>
+                        <artifactId>minify-maven-plugin</artifactId>
+                        <version>1.7.4</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>minify</goal>
+                                </goals>
+                                <configuration>
+                                    <charset>UTF-8</charset>
+                                    <cssSourceIncludes>
+                                        <cssSourceInclude>**</cssSourceInclude>
+                                    </cssSourceIncludes>
+                                    <jsSourceIncludes>
+                                        <jsSourceInclude>**</jsSourceInclude>
+                                    </jsSourceIncludes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin> 
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

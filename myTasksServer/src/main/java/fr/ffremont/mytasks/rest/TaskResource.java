@@ -5,6 +5,7 @@
  */
 package fr.ffremont.mytasks.rest;
 
+import fr.ffremont.mytasks.model.Task;
 import java.net.URI;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -31,9 +32,9 @@ import org.springframework.stereotype.Component;
 @Path("tasks")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class Task {
+public class TaskResource {
     
-    private final static Logger LOG = LoggerFactory.getLogger(Task.class);
+    private final static Logger LOG = LoggerFactory.getLogger(TaskResource.class);
 
     @Autowired
     MongoTemplate mongoTpl;

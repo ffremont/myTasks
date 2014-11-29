@@ -15,7 +15,7 @@ module.exports = function (grunt) {
             HtmlCss: {
                 expand: true,
                 cwd: 'public_html/',
-                src: ['**', '!js/**'],
+                src: ['**', '!js/**', '!mocks/**'],
                 dest: 'dist/'
             },
             bootrap: {
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
             },
             options: {
                 server: {
-                    baseDir: "./dist"
+                    baseDir: ["./dist", "./public_html"]
                 }
             }
         },

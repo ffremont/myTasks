@@ -9,8 +9,6 @@ import fr.ffremont.mytasks.model.Role;
 import fr.ffremont.mytasks.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,7 +26,7 @@ public class UserDao {
         current.setHash(hash);
         current.setName("Florent");
         current.setRole(Role.MANAGER);
-        
+        // @todo aa
         return current;
         //return mongoTpl.findOne(Query.query(Criteria.where("hash").is(hash)), User.class);
     }

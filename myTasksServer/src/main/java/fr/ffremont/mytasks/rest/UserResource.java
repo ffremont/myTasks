@@ -10,7 +10,6 @@ import fr.ffremont.mytasks.exception.NotFoundEntity;
 import fr.ffremont.mytasks.model.Role;
 import fr.ffremont.mytasks.rest.model.Login;
 import fr.ffremont.mytasks.security.UserPrincipal;
-import java.security.Principal;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
@@ -43,9 +42,9 @@ import org.springframework.stereotype.Component;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @PermitAll
-public class User {
+public class UserResource {
 
-    private final static Logger LOG = LoggerFactory.getLogger(User.class);
+    private final static Logger LOG = LoggerFactory.getLogger(UserResource.class);
 
     @Autowired
     MongoTemplate mongoTpl;
