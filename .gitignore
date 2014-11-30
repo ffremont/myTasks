@@ -9,3 +9,4 @@
 /myTasksDesktopClient/dist/
 /myTasksServer/target/
 /target/
+/myTasksDesktopClient/access_logs.db

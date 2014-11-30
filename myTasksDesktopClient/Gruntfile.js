@@ -2,19 +2,20 @@
  * Version : ${project.version}
  */
 module.exports = function (grunt) {
+    var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         clean: ["dist/", "bower_components/"],
         browserify: {
             js: {
-                src: 'public_html/js/app.js',
+                src: 'app/js/app.js',
                 dest: 'dist/js/app.js'
             }
         },
         copy: {
             HtmlCss: {
                 expand: true,
-                cwd: 'public_html/',
+                cwd: 'app/',
                 src: ['**', '!js/**', '!mocks/**'],
                 dest: 'dist/'
             },
@@ -43,7 +44,7 @@ module.exports = function (grunt) {
             },
             options: {
                 server: {
-                    baseDir: ["./dist", "./public_html"]
+                    baseDir: ["./dist"]
                 }
             }
         },
@@ -55,8 +56,42 @@ module.exports = function (grunt) {
         },
         watch: {
             prepare: {
-                files: ['public_html/**'],
+                files: ['app/**'],
                 tasks: ['default']
+            }
+        },
+        easymock: {
+            api: {
+                options: {
+                    port: 8888,
+                    keepalive: true,
+                    path: 'mocks',
+                    config: {
+                        routes: [
+                            "/api/login",
+                        ],
+                    },
+                },
+            }
+        },
+        connect: {
+            server: {
+                options: {
+                    port: 9999,
+                    hostname: 'localhost',
+                    keepalive: true,
+                    base: './dist'
+                },
+                proxies: [
+                    {
+                        context: 'api',
+                        host: 'localhost',
+                        port: 8888
+                    }
+                ],
+                middleware: function () {
+                    return [proxySnippet];
+                }
             }
         }
     });
@@ -68,7 +103,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-easymock');
+
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-connect-proxy');
 
     // The default tasks to run when you type: grunt
+    grunt.registerTask('default', ['bower:install', 'browserify', 'copy']);
+
     grunt.registerTask('default', ['bower:install', 'browserify', 'copy']);
 };

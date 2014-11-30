@@ -14,6 +14,22 @@
     <packaging>pom</packaging>
     
     <build>
+        <outputDirectory>dist</outputDirectory>
+        <sourceDirectory>app</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>mocks</directory>
+            </resource>
+            <resource>
+                <directory></directory>
+                <includes>
+                    <include>Gruntfile.js</include>
+                    <include>assembly.xml</include>
+                    <include>bower.json</include>
+                    <include>package.json</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
