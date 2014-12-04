@@ -3,6 +3,9 @@
  */
 module.exports = function (grunt) {
     var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+    var mountFolder = function (connect, dir) {
+        return connect.static(require('path').resolve(dir));
+    };
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         clean: ["dist/", "bower_components/"],
@@ -38,16 +41,6 @@ module.exports = function (grunt) {
                 dest: 'dist/css'
             }
         },
-        browserSync: {
-            bsFiles: {
-                src: './dist/**'
-            },
-            options: {
-                server: {
-                    baseDir: ["./dist"]
-                }
-            }
-        },
         bower: {
             install: {},
             options: {
@@ -64,14 +57,14 @@ module.exports = function (grunt) {
             api: {
                 options: {
                     port: 8888,
-                    keepalive: true,
+                    keepalive: false,
                     path: 'mocks',
                     config: {
                         routes: [
-                            "/api/login",
-                        ],
-                    },
-                },
+                            "/api/login"
+                        ]
+                    }
+                }
             }
         },
         connect: {
@@ -79,19 +72,32 @@ module.exports = function (grunt) {
                 options: {
                     port: 9999,
                     hostname: 'localhost',
+                    base: ['./dist'],
                     keepalive: true,
-                    base: './dist'
+                    middleware: function (connect, options, middlewares) {
+                        // inject a custom middleware 
+                         middlewares.unshift(proxySnippet);
+                        middlewares.unshift(function (req, res, next) {
+                            res.setHeader('Access-Control-Allow-Origin',          '*');
+                            res.setHeader('Access-Control-Allow-Methods',     'GET,HEAD,PUT,PATCH,POST,DELETE');
+                            res.setHeader('Allow',     'GET, HEAD, PUT, PATCH, POST, DELETE');
+                            
+                            return next();
+                        });                      
+                        
+                        return middlewares;
+                    }
                 },
                 proxies: [
                     {
-                        context: 'api',
+                        context: '/api',
                         host: 'localhost',
-                        port: 8888
+                        port: 8888,
+                        https: false,
+                            changeOrigin: false,
+                            xforward: false
                     }
-                ],
-                middleware: function () {
-                    return [proxySnippet];
-                }
+                ]
             }
         }
     });
@@ -111,5 +117,5 @@ module.exports = function (grunt) {
     // The default tasks to run when you type: grunt
     grunt.registerTask('default', ['bower:install', 'browserify', 'copy']);
 
-    grunt.registerTask('default', ['bower:install', 'browserify', 'copy']);
+    grunt.registerTask('dev', ['easymock', 'configureProxies:server', 'connect']);
 };
