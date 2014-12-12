@@ -25,18 +25,14 @@ module.exports = ['$window', '$http', '$state', function ($window, $http, $state
             $http.post('api/login', {login: login, password: pass}).
                 success(function (data, status, headers, config) {
                     console.log("ok login");
+                    me.current = data;
+                    window.localStorage['app.security'] = me.current.hash;
+                    
                     $state.go("dashboard");
-                    me.current = {
-                        role : "ADMIN"
-                    };
-                    window.localStorage['app.security'] = "oo";
+                    
                 }).error(function(){
                     console.log("ko login");
-                    me.current = {
-                        role : "ADMIN"
-                    };
-                    $window.localStorage['app.security'] = "oo";
-                    $state.go("dashboard");
+                    
                 });
         };
         this.logout = function(){

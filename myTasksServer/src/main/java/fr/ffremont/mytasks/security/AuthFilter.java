@@ -5,9 +5,8 @@
  */
 package fr.ffremont.mytasks.security;
 
-import fr.ffremont.mytasks.dao.UserDao;
-import fr.ffremont.mytasks.model.Role;
 import fr.ffremont.mytasks.model.User;
+import fr.ffremont.mytasks.repositories.UserRepository;
 import javax.annotation.Priority;
 import javax.inject.Inject;
 import javax.ws.rs.Priorities;
@@ -18,7 +17,6 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
  *
@@ -31,19 +29,16 @@ public class AuthFilter implements ContainerRequestFilter {
     private final static Logger LOG = LoggerFactory.getLogger(AuthFilter.class);
     
     @Inject
-    UserDao userDao;
+    UserRepository userRepo;
     
     @Override
     public void filter(ContainerRequestContext requestContext) {
         LOG.debug("AuthFilter process...");
         String authValue = requestContext.getHeaderString("authorization");
          
-        if(authValue == null){
-            LOG.debug("Unauthorized : no auth header");
-            throw new WebApplicationException(Status.UNAUTHORIZED);
-        }
-        
-        requestContext.setSecurityContext(new UserSecurityContext(new UserPrincipal(userDao.findUserByHash(authValue.replace(UserSecurityContext.AUTH_SCHEMA+" ", "")))));
+        User user = authValue == null ? null : userRepo.findOneByHash(authValue.replace(UserSecurityContext.AUTH_SCHEMA+" ", ""));
+                
+        requestContext.setSecurityContext(new UserSecurityContext(new UserPrincipal(user)));
     }
     
 }

@@ -9,25 +9,31 @@ import fr.ffremont.mytasks.rest.TimeStampAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  *
  * @author florent
  */
+@CompoundIndexes({
+        @CompoundIndex(name = "users_email_unique",
+                       unique = true,
+                       def = "{'email' : 1}")
+})
 @Document(collection = "users")
 public class User {
     @Id
     private String id;
     
-    private String name;
+    private String nickname;
+    
+    private String firstname;
+    
+    private String lastname;
     
     private String hash;
     
@@ -53,12 +59,28 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {

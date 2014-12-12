@@ -24,7 +24,6 @@ public class UserDao {
         User current = new User();
         current.setEmail("ff.fremont.florent@gmail.com");
         current.setHash(hash);
-        current.setName("Florent");
         current.setRole(Role.MANAGER);
         // @todo aa
         return current;

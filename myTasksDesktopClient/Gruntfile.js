@@ -73,10 +73,10 @@ module.exports = function (grunt) {
                     port: 9999,
                     hostname: 'localhost',
                     base: ['./dist'],
-                    keepalive: true,
+                    keepalive: false,
                     middleware: function (connect, options, middlewares) {
                         // inject a custom middleware 
-                         middlewares.unshift(proxySnippet);
+                        middlewares.unshift(proxySnippet);
                         middlewares.unshift(function (req, res, next) {
                             res.setHeader('Access-Control-Allow-Origin',          '*');
                             res.setHeader('Access-Control-Allow-Methods',     'GET,HEAD,PUT,PATCH,POST,DELETE');
@@ -92,10 +92,7 @@ module.exports = function (grunt) {
                     {
                         context: '/api',
                         host: 'localhost',
-                        port: 8888,
-                        https: false,
-                            changeOrigin: false,
-                            xforward: false
+                        port: 8888
                     }
                 ]
             }
@@ -117,5 +114,5 @@ module.exports = function (grunt) {
     // The default tasks to run when you type: grunt
     grunt.registerTask('default', ['bower:install', 'browserify', 'copy']);
 
-    grunt.registerTask('dev', ['easymock', 'configureProxies:server', 'connect']);
+    grunt.registerTask('dev', ['easymock', 'configureProxies:server', 'connect', 'watch']);
 };

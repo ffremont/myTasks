@@ -22,7 +22,7 @@ public class UserPrincipal implements Principal{
     
     @Override
     public String getName() {
-        return this.currentUser.getName();
+        return this.currentUser.getEmail();
     }
 
     public User getCurrentUser() {

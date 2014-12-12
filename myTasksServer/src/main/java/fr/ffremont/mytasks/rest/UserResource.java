@@ -8,8 +8,11 @@ package fr.ffremont.mytasks.rest;
 import fr.ffremont.mytasks.dao.UserDao;
 import fr.ffremont.mytasks.exception.NotFoundEntity;
 import fr.ffremont.mytasks.model.Role;
+import fr.ffremont.mytasks.repositories.UserRepository;
 import fr.ffremont.mytasks.rest.model.Login;
 import fr.ffremont.mytasks.security.UserPrincipal;
+import java.util.Base64;
+import java.util.Date;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
@@ -26,7 +29,6 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +52,7 @@ public class UserResource {
     MongoTemplate mongoTpl;
     
     @Autowired
-    UserDao userDao;
+    UserRepository userRepo;
 
     @Context
     private UriInfo uri;
@@ -60,7 +62,7 @@ public class UserResource {
 
     @POST
     public Response create(Login task) {
-        return Response.created(uri.getBaseUri()).build();
+        return Response.created(uri.getBaseUri()).build();  
     }
     
     @RolesAllowed({Role.USER, Role.MANAGER, Role.ADMIN})
@@ -72,14 +74,23 @@ public class UserResource {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response login(@FormParam("login") String login, @FormParam("password") String password) throws NotFoundEntity{
-        byte[] hash = DigestUtils.sha256(login+password);
-        
-        fr.ffremont.mytasks.model.User user = userDao.findUserByHash(new String(hash));
+        fr.ffremont.mytasks.model.User user = userRepo.findOneByEmail(login);
         
         if(user == null){
-            LOG.debug("échec de la connexion : "+login+":"+password);
+            LOG.warn("échec de l'authentification : "+login+":"+password);
             throw new WebApplicationException(Status.UNAUTHORIZED);
         }
+        
+        byte[] hash = DigestUtils.sha256(login+password);
+        String myHash = new String(Base64.getEncoder().encode(hash));
+        
+        if(!myHash.equals(user.getHash())){
+            LOG.warn("échec de l'authentification : "+login+":"+password);
+            throw new WebApplicationException(Status.UNAUTHORIZED);
+        }
+        
+        user.setLastConnexion(new Date());
+        userRepo.save(user);
         
         return Response.ok().entity(user).build();
     }

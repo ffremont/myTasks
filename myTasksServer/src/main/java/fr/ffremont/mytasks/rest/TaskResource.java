@@ -6,11 +6,11 @@
 package fr.ffremont.mytasks.rest;
 
 import fr.ffremont.mytasks.model.Task;
-import java.net.URI;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -43,10 +43,31 @@ public class TaskResource {
     private UriInfo uri;
     
     @POST
-    public Response create(Task task){
+    public Response add(Task task){
         mongoTpl.insert(task);
         
         return Response.created(uri.getBaseUri()).build();
+    }
+    
+    @PUT
+    public Response modify(Task task){
+        //mongoTpl.insert(task);
+        
+        return Response.ok().build();
+    }
+    
+    /**
+     * Retoure la liste des tâches de + récente à la - récente (updated)
+     * 
+     * @param tags
+     * @return 
+     */
+    @GET
+    @Path("/tags/search")
+    public Response searchByTags(@QueryParam("tag") final List<String> tags){
+        
+        
+        return Response.ok().build();
     }
     
     @POST
